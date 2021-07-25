@@ -14,7 +14,7 @@ class Particle : public sf::Drawable
 {
 public:
 	Particle(sf::Vector2f position, sf::Color color);
-	Particle(sf::Vector2f position, sf::Vector2f velocity);
+	Particle(sf::Vector2f position, sf::Vector2f acceleration);
 	~Particle();
 
 	//Accessors

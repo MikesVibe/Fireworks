@@ -11,7 +11,6 @@ Particle::Particle(sf::Vector2f position, sf::Color color)
 	vl::VectorMulA(this->velocity, (static_cast<float>(rand() % 300 + 100) / 100.f));
 
 
-
 	//Set shape's parameters
 	this->shape.setRadius(3.f);
 	this->shape.setFillColor(color);
@@ -41,6 +40,8 @@ Particle::~Particle()
 {
 }
 
+
+//Accessors
 const sf::Vector2f& Particle::getPosition() const
 {
 	return this->position;
@@ -56,11 +57,15 @@ const sf::Color& Particle::getColor() const
 	return this->shape.getFillColor();
 }
 
+
+//Modifiers
 void Particle::setImmortal(bool immortal)
 {
 	this->immortal = immortal;
 }
 
+
+//Functions
 void Particle::applyForce(sf::Vector2f force)
 {
 	this->acceleration = force;
@@ -88,12 +93,10 @@ void Particle::update(float dt)
 				this->die();
 			}
 			this->lifetime = clock.getElapsedTime().asSeconds();
-
 		}
 		
 
 		this->acceleration *= dt;
-
 		vl::VectorAddToA(this->velocity, this->acceleration);
 		vl::VectorAddToA(this->position, this->velocity);
 		this->shape.setPosition(this->position);

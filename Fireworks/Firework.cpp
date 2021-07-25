@@ -3,13 +3,26 @@
 
 Firework::Firework()
 {
-	this->mainParticle = new Particle(sf::Vector2f(500.f, 970.f), sf::Vector2f(0.f, -16.2f));
+	this->startingVelocity = sf::Vector2f(0.f, -13.2f);
+	this->gravityForce = sf::Vector2f(0.f, 10.f);
+
+
+	this->mainParticle = new Particle(sf::Vector2f(500.f, 970.f), this->startingVelocity);
 	this->mainParticle->setImmortal(true);
 
 	this->subParticles.reserve(300);
-	this->airResistanceForce = sf::Vector2f(0.1f, 0.1f);
+}
+
+Firework::Firework(sf::Vector2f startPos, float maxHeight, float maxRadius)
+	: maxHeight(maxHeight), maxRadius(maxRadius)
+{
+	this->startingVelocity = sf::Vector2f(0.f, -13.2f);
 	this->gravityForce = sf::Vector2f(0.f, 10.f);
 
+	this->mainParticle = new Particle(startPos, this->startingVelocity);
+	this->mainParticle->setImmortal(true);
+
+	this->subParticles.reserve(300);
 }
 
 Firework::~Firework()
@@ -26,7 +39,7 @@ void Firework::applyForces()
 	//Apply air resistance to subParticles of recket
 	for (auto particle : subParticles)
 	{
-		particle->addResistance(99.2f);
+		particle->addResistance(99.8f);
 	}
 }
 

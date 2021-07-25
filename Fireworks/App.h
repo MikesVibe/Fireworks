@@ -12,6 +12,8 @@ public:
 
 
     //functions
+    void fireworkShow();
+
     void updateDt();
     void updateKeytime();
     void updateWindowEvents();
